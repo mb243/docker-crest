@@ -66,6 +66,7 @@ fetch_distrofile(){
 
 main() {
   detect_distro
+  fetch_distrofile
 }
 
 main
