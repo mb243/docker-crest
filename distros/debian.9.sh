@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DEBIAN_FRONTEND=noninteractive
+
 install_pubkey() {
   # set up ssh pubkey
   echo Setting up ssh pubkey...
