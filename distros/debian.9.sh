@@ -102,7 +102,6 @@ install_docker() {
 
 install_compose() {
   apt-get install -y python-pip
-  pip install -U pip
   pip install docker-compose
 }
 
