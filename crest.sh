@@ -11,49 +11,50 @@ if [[ ! $SKIP ]]; then read -p "Skip updates and server hardening?" SKIP; fi
 
 detect_distro() {
   # Based on https://unix.stackexchange.com/a/6348
-  echo -n "Attempting to detect the distro and version... "
+  echo "Attempting to detect the distro and version... "
   if [ -f /etc/os-release ]; then
     # freedesktop.org and systemd
-    echo -n "found /etc/os-release... "
+    echo "Found /etc/os-release, using it."
     . /etc/os-release
     OS=$NAME
     VER=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then
     # linuxbase.org
-    echo -n "found lsb_release... "
+    echo "Found lsb_release, using it."
     OS=$(lsb_release -si)
     VER=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then
     # some versions of Debian/Ubuntu without lsb_release command
-    echo -n "found /etc/lsb-release... "
+    echo "Found /etc/lsb-release, using it."
     . /etc/lsb-release
     OS=$DISTRIB_ID
     VER=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then
     # Older Debian/Ubuntu/etc.
-    echo -n "found /etc/debian_version... "
+    echo "Found /etc/debian_version, using it."
     OS=Debian
     VER=$(cat /etc/debian_version)
   elif [ -f /etc/SuSe-release ]; then
     # Older SuSE/etc.
-    echo -n "found /etc/SuSe-release... "
-    echo -n "Unsupported!"
+    echo "Found /etc/SuSe-release, using it."
+    echo "SuSe-release not implemented. Stopping."
     return 1
   elif [ -f /etc/redhat-release ]; then
     # Older Red Hat, CentOS, etc.
-    echo -n "found /etc/redhat-release... "
-    echo -n "Unsupported!"
+    echo "Found /etc/redhat-release, using it."
+    echo "redhat-release not implemented. Stopping"
     return 1
   else
     # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
-    echo -n "using uname... "
+    echo "Found uname, using it."
     OS=$(uname -s)
     VER=$(uname -r)
   fi
   echo "Detected OS=$OS VER=$VER"
+  sleep 2
 }
 
-fetch_distrofile(){
+fetch_distrofile() {
   # Split $OS at the first space and lowercase
   # "Debian GNU/Linux" becomes "debian"
   # This technically makes D an array, but referring to an array without an
