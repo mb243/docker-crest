@@ -59,7 +59,7 @@ fetch_distrofile() {
   # "Debian GNU/Linux" becomes "debian"
   # This technically makes D an array, but referring to an array without an
   # index always gives you the 0th element.
-  local d=$(echo $A | cut -d ' ' -f 1 | tr '[:upper:]' '[:lower:]')
+  local d=$(echo $OS | cut -d ' ' -f 1 | tr '[:upper:]' '[:lower:]')
   curl -o distro.sh \
     https://raw.githubusercontent.com/mb243/docker-crest/master/distros/$d.$VER.sh
   . ./distro.sh
