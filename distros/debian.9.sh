@@ -28,7 +28,7 @@ do_apt_update() {
 remove_unneeded() {
   # remove unneeded services
   echo Removing unneeded services...
-  yum remove -y avahi chrony
+  # yum remove -y avahi chrony
   echo ...done
 }
 
