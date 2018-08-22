@@ -3,6 +3,7 @@
 # based on https://github.com/hwdsl2/docker-ipsec-vpn-server
 
 # TODO: Configure this to load on every boot
+# though what I've tested so far doesn't seem to require the extra effort
 sudo modprobe af_key
 
 # write out the docker-compose file
