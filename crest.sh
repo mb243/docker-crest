@@ -60,8 +60,17 @@ fetch_distrofile() {
   # This technically makes D an array, but referring to an array without an
   # index always gives you the 0th element.
   local d=$(echo $OS | cut -d ' ' -f 1 | tr '[:upper:]' '[:lower:]')
-  curl -o distro.sh \
-    https://raw.githubusercontent.com/mb243/docker-crest/master/distros/$d.$VER.sh
+  
+  # Build in retry
+  X=0
+  while [[ $X != "200" ]]; do 
+    echo -n "Trying to download script... "
+    X=$(curl -o distro.sh -sw "%{http_code}" -L \
+        https://raw.githubusercontent.com/mb243/docker-crest/master/distros/$d.$VER.sh)
+    echo $X
+  done
+  sleep 2
+
   . ./distro.sh
 }
 
