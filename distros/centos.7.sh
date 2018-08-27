@@ -96,7 +96,7 @@ fetch_and_exec() {
   echo -n "Sleeping for 2 seconds before moving on... "
   sleep 2
   echo "ship it!"
-  $RUNCMD
+  $RUNCMD &
 }
 
 main() {
