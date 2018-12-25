@@ -22,8 +22,8 @@ disable_PasswordAuthentication() {
 
 do_apt_update() {
   # Initial needfuls
-  apt-get update -y
-  apt-get upgrade -y
+  apt update -y
+  apt upgrade -y
 }
 
 remove_unneeded() {
@@ -50,7 +50,7 @@ __EOF__
 configure_fail2ban() {
   # set up fail2ban
   echo Setting up fail2ban...
-  apt-get install -y fail2ban
+  apt install -y fail2ban
   cd /etc/fail2ban
   cp fail2ban.conf fail2ban.local
   cp jail.conf jail.local
@@ -61,7 +61,7 @@ configure_fail2ban() {
 }
 
 configure_ufw() {
-  apt-get install -y ufw
+  apt install -y ufw
   ufw allow ssh
   ufw allow http/tcp
   ufw allow https/tcp
@@ -73,19 +73,19 @@ configure_ufw() {
 
 configure_ntp() {
   # ensure ntp is installed and running
-  apt-get install -y ntp
+  apt install -y ntp
   systemctl enable ntpd
   systemctl start ntpd
 }
 
 clean_docker() {
   # Remove unneeded docker packages
-  apt-get remove -y docker docker-engine docker.io
+  apt remove -y docker docker-engine docker.io
 }
 
 install_docker() {
   # Install Docker
-  apt-get install -y \
+  apt install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -95,20 +95,20 @@ install_docker() {
      "deb [arch=amd64] https://download.docker.com/linux/debian \
      $(lsb_release -cs) \
      stable"
-  apt-get update
-  apt-get install -y docker-ce
+  apt update
+  apt install -y docker-ce
   systemctl enable docker
   systemctl start docker
 }
 
 install_compose() {
-  apt-get install -y python-pip
+  apt install -y python-pip
   pip install docker-compose
 }
 
 fetch_and_exec() {
   if [[ "$RESOURCE" != "" ]]; then
-    apt-get install -y wget
+    apt install -y wget
     wget $RESOURCE
   fi
   # needfuls done
