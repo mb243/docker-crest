@@ -104,7 +104,7 @@ main() {
   install_pubkey
   # Always install epel-release. Other things depend on it
   install_epel_release
-  if [[ "$SKIP" = "no" ]]; then
+  if [[ "$SKIP" != "yes" ]]; then
     disable_PasswordAuthentication
     do_yum_update
     remove_unneeded

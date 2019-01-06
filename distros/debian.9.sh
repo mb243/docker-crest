@@ -123,7 +123,7 @@ main() {
   # Always install pubkey, and do it early
   install_pubkey
 
-  if [[ "$SKIP" = "no" ]]; then
+  if [[ "$SKIP" != "yes" ]]; then
     configure_ufw
     disable_PasswordAuthentication
     do_apt_update
