@@ -110,8 +110,7 @@ install_compose() {
 
 fetch_and_exec() {
   if [[ "$RESOURCE" != "" ]]; then
-    apt-get install -y wget
-    wget $RESOURCE
+    curl -LO $RESOURCE
   fi
   # needfuls done
   echo "=== Docker install complete ==="
