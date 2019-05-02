@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 install_ssh_pubkey() {
   echo Setting up ssh pubkey...
